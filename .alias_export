@@ -1,0 +1,58 @@
+#!/bin/bash
+# Custom Prompts
+
+# current git branch in my prompt
+PS1="\h:\W:\[\e[1;31m\]\$(parse_git_branch)\[\e[0m\]$ "
+GIT_PS1_SHOWDIRTYSTATE=true
+
+# fix mysql prompt to show host/user/db
+export MYSQL_PS1="(\u@\h) [\d]> "
+
+# Setup colors and color reset
+_tput=$(which tput)
+black=$(${_tput} setaf 0)
+red=$(${_tput} setaf 1)
+green=$(${_tput} setaf 2)
+yellow=$(${_tput} setaf 3)
+blue=$(${_tput} setaf 4)
+magenta=$(${_tput} setaf 5)
+cyan=$(${_tput} setaf 6)
+white=$(${_tput} setaf 7)
+cr=$(${_tput} sgr 0)
+
+# Really need to split these into computer/os agnostic settings somehow
+#history control
+export HISTSIZE=50000
+export HISTFILESIZE=100000
+export HISTCONTROL=ignoredups
+export HISTIGNORE='&:ls:cd ~:cd ..:[bf]g:exit:h:history'
+export HISTCONTROL=erasedups
+export PROMPT_COMMAND='history -a'
+export HISTCONTROL=ignorespace
+
+_vim=$(which vim)
+export EDITOR=$_vim
+export VISUAL=$_vim
+export RSYNC_RSH=ssh
+export RUBYOPT=rubygems
+export MYSQL_PS1="(\u@\h) [\d]> "
+shopt -s histappend
+
+alias vi=${_vim}
+alias ll='ls -lrtha'
+alias la='ls -A'
+alias l='ls -CF'
+alias txt='dig txt $1 +short'
+alias grep='/bin/grep -n --color=auto'
+alias greparound='/bin/grep -n --color=auto -A10 -B10'
+alias mv='/bin/mv -i'
+alias cp='/bin/cp -i'
+alias rsync='/usr/bin/rsync -Pavz'
+alias lsd='ls -d {.,}*/'
+alias find_setuid='find / -type f \( -perm -4000 -o -perm -2000 \)'
+alias hosts="${_vim} ~/.ssh/known_hosts"
+alias showcert='openssl x509 -text -in'
+alias showkey='openssl rsa -text -in'
+alias listen='sudo lsof -i -n -P'
+alias epoch='date -j -f "%a %b %d %T %Z %Y" "`date`" "+%s"'
+alias llg='ls -lrtha | grep -ri'

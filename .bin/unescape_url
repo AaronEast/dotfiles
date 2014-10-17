@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby -w
+# Encoding: utf-8
+
+require 'CGI'
+
+if ARGV.empty?
+  puts "Usage: #{File.basename($PROGRAM_NAME)} <string>"
+  exit
+else
+  string = ARGV[0]
+end
+
+puts CGI.unescape(string)

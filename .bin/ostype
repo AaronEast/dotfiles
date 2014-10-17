@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+uname=`uname`
+
+if [[ $uname =~ [Ll]inux ]]; then
+  echo 'linux'
+elif [[ $uname =~ [Dd]arwin ]]; then
+  echo 'darwin'
+else
+  echo 'unknown'
+fi
