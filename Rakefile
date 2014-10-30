@@ -24,6 +24,8 @@ $exclude = [
 
 desc 'Update dotfiles repository.'
 task :update do
+  setup
+  puts "git clone #{@repo}"
   system "git clone #{@repo}"
 end
 
@@ -34,7 +36,7 @@ namespace :install do
 
   desc 'Get Deps.'
   task :deps do
-    setup
+    puts 'no deps'
   end
 
   desc 'Copy dotfiles over to home dir.'
